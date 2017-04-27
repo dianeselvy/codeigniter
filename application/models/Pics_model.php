@@ -6,7 +6,7 @@ class Pics_model extends CI_Model {
                 $this->load->database();
     }
     
-    public function get_news($slug = FALSE)
+    public function get_pics($slug = FALSE)
     {
         if ($slug === FALSE)
         {
@@ -16,7 +16,7 @@ class Pics_model extends CI_Model {
 
         $query = $this->db->get_where('sp17_pics', array('slug' => $slug));
         return $query->row_array();
-    }//end get_news() method
+    }//end get_pics() method
     
     
     public function set_pics()
@@ -32,7 +32,7 @@ class Pics_model extends CI_Model {
         );
 
         return $this->db->insert('sp17_pics', $data);
-    }//end set_news() method
+    }//end set_pics() method
     
     
-}//end news_model class
+}//end pics_model class

@@ -5,16 +5,15 @@ class News extends CI_Controller {
         {
             parent::__construct();
             $this->load->model('news_model');
-            $this->load->helper('url_helper');
+            $this->load->helper('url');
+            $this->config->set_item('banner','News Banner');
         }
 
         public function index()
         {
             $data['news'] = $this->news_model->get_news();
-            $data['title'] = 'News archive';
-            //$this->load->view('templates/header', $data);
+            $this->config->set_item('title', 'News Archive');
             $this->load->view('news/index', $data);
-            //$this->load->view('templates/footer', $data);
         }
 
         public function view($slug = NULL)
@@ -46,17 +45,25 @@ class News extends CI_Controller {
 
         if ($this->form_validation->run() === FALSE)
         {//show form
-            //$this->load->view('templates/header', $data);
             $this->load->view('news/create', $data);
-            //$this->load->view('templates/footer', $data);
-
         }
         else
-        {//say thanks for entering data
-            $this->news_model->set_news();
-            //$this->load->view('templates/header', $data);
-            $this->load->view('news/success', $data);
-            //$this->load->view('templates/footer', $data);
+        {//show newly created news item
+            $slug = $this->news_model->set_news();
+            
+            if($slug)
+            {//data looks good
+                feedback('News item successfully created!', 'notice');
+                redirect('/news/view/' . $slug);
+            }
+            else 
+            {//data looks bad
+                feedback('News item NOT created!', 'warning');
+                redirect('/news/create');
+            }
+            
+            //$data['title'] = "Item Encountered!";
+            //$this->load->view('news/success', $data);
         }
     }//end create method
     

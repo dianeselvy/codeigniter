@@ -17,6 +17,17 @@ $this->load->view($this->config->item('theme') . 'header');
 
 <?php endforeach; ?>
 
+<!--
+<ul>
+    <li><a href="mariners.php">Mariners</a></li>
+    <li><a href="seahawks.php">Seahawks</a></li>
+    <li><a href="sounders.php">Sounders</a></li>
+</ul>
+-->
+
+
+
+
 <?php
 
 $this->load->view($this->config->item('theme') . 'footer');

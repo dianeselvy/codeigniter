@@ -31,7 +31,26 @@ class News_model extends CI_Model {
             'text' => $this->input->post('text')
         );
 
-        return $this->db->insert('sp17_news', $data);
+        //return $this->db->insert('sp17_news', $data);
+        
+        if($this->db->insert('sp17_news', $data))
+        {//data entered successfully
+            /*
+            this is the normal way to pass a newly created ID back
+            return $this->db->insert_id();
+            */
+            
+            //the slug is used for the view, so pass it back
+            return $slug;
+        }
+        else
+        {//something went wrong
+            return false;
+        }
+        
+        
+        
+        
     }//end set_news() method
     
     
